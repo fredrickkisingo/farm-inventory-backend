@@ -1,6 +1,11 @@
 <?php
 
+use App\Http\Controllers\FarmInertiaController;
+use App\Models\Farm;
+
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +19,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+  
+    $farm = Farm::latest()->get();
+
+    return Inertia::render('Farm/Index', ['farm' => $farm]);
 });
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
+});
+
+Route::resource('farm-inventory', FarmInertiaController::class);
+
+
