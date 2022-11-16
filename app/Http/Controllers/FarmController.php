@@ -104,6 +104,7 @@ class FarmController extends Controller
      * @param  \App\Models\Farm  $farm
      * @return \Illuminate\Http\Response
      */
+    
     public function update(Request $request,$id)
     {
         $farm=Farm::find($id);

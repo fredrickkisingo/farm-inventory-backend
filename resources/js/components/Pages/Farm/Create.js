@@ -77,7 +77,7 @@ const Create = () => {
                                     label="image"
                                     name="image"
                                     errors={errors.image}
-                                    value={data.image}
+                                    value={""}
                                     onChange={(e) =>
                                         setData("image", e.target.files[0])
                                     }
