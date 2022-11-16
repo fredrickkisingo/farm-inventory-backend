@@ -95,7 +95,8 @@ class FarmInertiaController extends Controller
             'farm' => [
                 'id' => $farm->id,
                 'name' => $farm->name,
-                'description' => $farm->description
+                'description' => $farm->description,
+                'image' => $farm->image
             ]
         ]);
     }
@@ -109,11 +110,14 @@ class FarmInertiaController extends Controller
      */
     public function update(Request $request,$id)
     {
+
+     
         $farm= Farm::find($id);
         
-        $farm->fill($request->post())->update();
+        $farm->update($request->all());
 
       
+        
         if($request->hasFile('image') && $request->image !== null){
 
             // remove old image

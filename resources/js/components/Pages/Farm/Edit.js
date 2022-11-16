@@ -10,13 +10,15 @@ const Edit = () => {
     const { data, setData, put, errors } = useForm({
         name: farm.name || "",
         description: farm.description || "",
-        image: farm.image || "",
+        image:  "",
     });
 
     function handleSubmit(e) {
         e.preventDefault();
+        
         put(route("farm-inventory.update", farm.id));
     }
+    
     function destroy() {
         if (confirm("Are you sure you want to delete this inventory?")) {
             Inertia.delete(route("farm-inventory.destroy", farm.id));
@@ -79,12 +81,12 @@ const Edit = () => {
                                 <label className="">Image</label>
                                 <input
                                     type="file"
-                                    className="w-full rounded"
+                                    className="w-full rounded" 
                                     label="image"
                                     name="image"
-                                    errors={errors.image}
-                                    value ={data.image}
-                                    onChange={(e) =>
+                                    accept=".png, .jpg, .jpeg"
+                                    errors={errors.image}                               
+                                     onChange={(e) =>
                                         setData("image", e.target.files[0])
                                     }
                                 />
